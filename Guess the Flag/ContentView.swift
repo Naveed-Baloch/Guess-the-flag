@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Button("Click on Button", action : { printName(name: "Naveed") })
-    }
-    
-    func printName(name: String) {
-        print("Naveed \(name)")
+        VStack {
+            Button("Login", role: .destructive,action: {})
+                .buttonStyle(.bordered)
+            
+            Button("Logout",role: .destructive, action: {})
+                .buttonStyle(.borderedProminent)
+        }
     }
 }
 

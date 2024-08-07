@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Guess_the_FlagApp: App {
+struct GuessFlagApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
