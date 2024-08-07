@@ -12,9 +12,11 @@ struct ContentView: View {
         VStack {
             Button("Login", role: .destructive,action: {})
                 .buttonStyle(.bordered)
+                .tint(.blue)
             
             Button("Logout",role: .destructive, action: {})
                 .buttonStyle(.borderedProminent)
+                .tint(.primary)
         }
     }
 }
