@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            RadialGradient(colors: [.red, .blue], center: .center, startRadius: 100, endRadius: 1000)
+            AngularGradient(colors: [.red, .yellow, .green, .blue, .purple, .red], center: .bottom)
                 .ignoresSafeArea()
         }
     }
