@@ -10,13 +10,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Button("Login", role: .destructive,action: {})
-                .buttonStyle(.bordered)
-                .tint(.blue)
-            
-            Button("Logout",role: .destructive, action: {})
-                .buttonStyle(.borderedProminent)
-                .tint(.primary)
+            Image(systemName: "globe")
+                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 122)
         }
     }
 }
