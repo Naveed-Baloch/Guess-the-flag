@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isShowingAlert = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 122)
+        VStack{
+            Button {
+                isShowingAlert = true
+            } label: {
+                Label("Edit", systemImage: "pencil")
+                    .padding()
+                    .foregroundStyle(.white)
+                    .background(.red)
+                    .containerShape(.capsule)
+            }
+            
+            
         }
+        .alert("Important message", isPresented: $isShowingAlert) {
+            Button("Delete", role: .destructive) { }
+            Button("Cancel", role: .cancel) { }
+            Button("Edit") { }
+        } message: {
+            Text("Please read this")
+        }
+    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+        
     }
 }
 
