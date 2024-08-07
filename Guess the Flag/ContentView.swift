@@ -20,18 +20,15 @@ struct ContentView: View {
                     .background(.red)
                     .containerShape(.capsule)
             }
-            
-            
+            .alert("Important message", isPresented: $isShowingAlert) {
+                Button("Delete", role: .destructive) { }
+                Button("Cancel", role: .cancel) { }
+                Button("Edit", role: .destructive) { }
+            } message: {
+                Text("Please read this")
+            }
         }
-        .alert("Important message", isPresented: $isShowingAlert) {
-            Button("Delete", role: .destructive) { }
-            Button("Cancel", role: .cancel) { }
-            Button("Edit") { }
-        } message: {
-            Text("Please read this")
-        }
-    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-        
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
     }
 }
 
