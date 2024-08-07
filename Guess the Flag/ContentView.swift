@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            AngularGradient(colors: [.red, .yellow, .green, .blue, .purple, .red], center: .bottom)
-                .ignoresSafeArea()
-        }
+        Button("Click on Button", action : { printName(name: "Naveed") })
+    }
+    
+    func printName(name: String) {
+        print("Naveed \(name)")
     }
 }
 
