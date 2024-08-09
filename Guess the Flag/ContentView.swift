@@ -12,8 +12,15 @@ struct ContentView: View {
     
     @State var correctCountryIndex = Int.random(in: 0...2)
     @State var guessedCountryIndex = -1
-    @State private var showResult = false
+    
     @State private var dialogMessage = ""
+
+    private let totalLevels = 3
+    @State private var currentLevel = 1
+    @State private var score = 0
+    @State private var showGameResult = false
+    @State private var showRoundResult = false
+    
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -58,26 +65,43 @@ struct ContentView: View {
             }
             .padding(.horizontal, 25)
         }
-        .alert(dialogMessage,isPresented: $showResult){
-            Button("Next", action: askQuestion)
-            if guessedCountryIndex != correctCountryIndex {
-                Button("Retry", action: { showResult = false })
+        .alert(dialogMessage,isPresented: $showRoundResult) {
+            if currentLevel == totalLevels {
+                Button("Check Result", action: {
+                    showGameResult = true
+                })
+            } else {
+                Button("Next", action: askQuestion)
+                if guessedCountryIndex != correctCountryIndex {
+                    Button("Retry", action: { showRoundResult = false })
+                }
             }
+        }
+        .alert("Game Result",isPresented: $showGameResult){
+            Button("Reset Game") {
+                currentLevel = 0
+                score = 0
+                askQuestion()
+            }
+        } message: {
+            Text("Score: \(score)/\(totalLevels)")
         }
     }
     
     func askQuestion() {
+        currentLevel += 1
         countries.shuffle()
         correctCountryIndex = Int.random(in: 0...2)
     }
     
     func checkAnswer() {
         if guessedCountryIndex == correctCountryIndex {
+            score += 1
             dialogMessage = "Correct Answer Nice Work"
         } else {
             dialogMessage = "In correct answer"
         }
-        showResult = true
+        showRoundResult = true
     }
 }
 
