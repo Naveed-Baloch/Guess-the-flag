@@ -41,8 +41,13 @@ struct ContentView: View {
                         Text("Tap the flag of")
                             .font(.subheadline.weight(.heavy))
                             .foregroundStyle(.white)
+
                         Text(countries[correctCountryIndex])
                             .font(.largeTitle.weight(.semibold))
+                            .foregroundStyle(.white)
+                        
+                        Text("Round \(currentLevel)/\(totalLevels)")
+                            .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.white)
                     }
                     
