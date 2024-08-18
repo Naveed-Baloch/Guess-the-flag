@@ -29,7 +29,7 @@
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/GuessTheFlag.git
+    git clone https://github.com/naveed-baloch/GuessTheFlag.git
     ```
 2. Open the project in Xcode:
     ```sh
