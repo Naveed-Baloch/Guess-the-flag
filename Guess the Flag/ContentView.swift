@@ -20,7 +20,9 @@ struct ContentView: View {
     @State private var score = 0
     @State private var showGameResult = false
     @State private var showRoundResult = false
-    
+    @State private var rotationAngle = 0.0
+    @State private var selectedFlagScale = 1.0
+    @State private var opacityOfNonSelectedFlags = 1.0
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -52,13 +54,33 @@ struct ContentView: View {
                     }
                     
                     ForEach(0..<3) { number in
+                        let animateFlag = guessedCountryIndex == number
                         Button {
                             guessedCountryIndex = number
-                            checkAnswer()
+                            withAnimation {
+                                rotationAngle = 180.0
+                                selectedFlagScale = 1.2
+                                opacityOfNonSelectedFlags = 0.25
+                            }
+                            // Wait for the animation to complete then check the result
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                rotationAngle = 0.0
+                                withAnimation{
+                                    selectedFlagScale = 1.0
+                                }
+                                checkAnswer()
+                            })
+                            
+                            
                         } label: {
                             Image(countries[number])
                                 .clipShape(.rect(cornerRadius: 10))
                                 .shadow(radius: 5)
+                                .opacity(guessedCountryIndex != -1 && !animateFlag ? opacityOfNonSelectedFlags : 1)
+                                .rotation3DEffect(
+                                    .degrees(animateFlag ? rotationAngle : 0.0), axis: (x: 1.0, y: 0.0, z: 0.0)
+                                )
+                                .scaleEffect(animateFlag ? selectedFlagScale : 1.0)
                         }
                     }
                 }
@@ -96,6 +118,7 @@ struct ContentView: View {
     func askQuestion() {
         currentLevel += 1
         countries.shuffle()
+        opacityOfNonSelectedFlags = 1.0
         correctCountryIndex = Int.random(in: 0...2)
     }
     
